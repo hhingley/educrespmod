@@ -3,10 +3,12 @@ Title: Fit and Compare Educational Response Models
 Version: 0.0.0.9000
 Authors@R: 
     person("Harvey", "Hingley", , "hh3g21@soton.ac.uk", role = c("aut", "cre"))
-Description: Toolkit for fitting and comparing statisical models of students responding to questions, including Item Response Theory (IRT) and Bayesian Knowledge Tracing (BKT) models. Provides data preprocessing tools, model fitting, prediction and evaluation. Uses real educational data as an example (ASSISTments)
+Description: Toolkit for fitting and comparing statisical models of students responding to questions, including Item Response Theory (IRT) and Bayesian Knowledge Tracing (BKT) models. Provides data preprocessing tools, model fitting, prediction and evaluation. Uses real educational data as an example (ASSISTments).
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
 URL: https://github.com/hhingley/educrespmod
 BugReports: https://github.com/hhingley/educrespmod/issues
+Imports: 
+    utils
