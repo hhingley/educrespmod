@@ -1,11 +1,10 @@
 Package: educrespmod
-Title: What the Package Does (One Line, Title Case)
+Title: Fit and Compare Educational Response Models
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Harvey", "Hingley", , "hh3g21@soton.ac.uk", role = c("aut", "cre"))
+Description: Toolkit for fitting and comparing statisical models of students responding to questions, including Item Response Theory (IRT) and Bayesian Knowledge Tracing (BKT) models. Provides data preprocessing tools, model fitting, prediction and evaluation. Uses real educational data as an example (ASSISTments)
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
