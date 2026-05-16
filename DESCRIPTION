@@ -11,5 +11,6 @@ RoxygenNote: 8.0.0
 URL: https://github.com/hhingley/educrespmod
 BugReports: https://github.com/hhingley/educrespmod/issues
 Imports: 
+    BKT,
     dplyr,
     utils
