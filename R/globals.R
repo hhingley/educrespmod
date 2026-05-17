@@ -5,5 +5,7 @@ utils::globalVariables(c(
   "is_test",
   "problem_id",
   "correct",
-  "has_variation"
+  "has_variation",
+  "n_resp",
+  "is_validate"
 ))

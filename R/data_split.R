@@ -46,3 +46,26 @@ clean_single_response <- function(split_data) {
   split_data |>
     dplyr::filter(is_test == FALSE | user_id %in% train_users)
 }
+#' Split training data into tuning and validation sets
+#'
+#' @description
+#' For tuning IRT hyperparameters, further splits the training data into a
+#' tuning set and validation set. Each student's last response goes into
+#' the validation set. Students with only one response are kept in the
+#' tuning set only and contribute no validation data.
+#'
+#' @param split_data A data frame output from \code{clean_single_response()}
+#'
+#' @return A data frame of training data with an additional logical column
+#'   \code{is_validate}
+#' @export
+validate_split <- function(split_data) {
+  split_data |>
+    dplyr::filter(is_test == FALSE) |>
+    dplyr::group_by(user_id) |>
+    dplyr::mutate(
+      n_resp = dplyr::n(),
+      is_validate = n_resp > 1 & order_id == max(order_id, na.rm = TRUE)
+    ) |>
+    dplyr::ungroup()
+}

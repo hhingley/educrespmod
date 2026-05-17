@@ -55,3 +55,41 @@ count_responses <- function(split_data, minimum) {
     return(TRUE)
   }
 }
+
+#' Check all validation problems appear in the training data
+#'
+#' @description
+#' For IRT models, item parameters can only be estimated for problems seen
+#' during training. This function checks all problems in the validation set also
+#' appear in the training set.
+#'
+#' @param split_data A data frame output from \code{clean_single_response()}
+#'
+#' @return Logical, TRUE if all validation problems appear in training
+#' @export
+check_all_probs_val <- function(split_data){
+  check_result <- length(unique(split_data[split_data$is_validate == FALSE,]$problem_id)) == length(unique(split_data$problem_id))
+  return(check_result)
+}
+
+#' Check all validation problems have variation in response
+#'
+#' @description
+#' For IRT models, each problem must have at least one correct and one
+#' incorrect response in the training set for item parameters to be estimated.
+#'
+#' @param split_data A data frame output from \code{clean_single_response()}
+#'
+#' @return Logical, TRUE if all validation problems have variation in responses
+#' @export
+has_problem_variation_val <- function(split_data) {
+  train_data <- split_data |>
+    dplyr::filter(is_validate == FALSE)
+  train_data |>
+    dplyr::group_by(problem_id) |>
+    dplyr::summarise(
+      has_variation = dplyr::n_distinct(correct) > 1,
+      .groups = "drop") |>
+    dplyr::pull(has_variation) |>
+    all()
+}
