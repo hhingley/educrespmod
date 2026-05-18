@@ -2,7 +2,7 @@
 % Please edit documentation in R/data_load.R
 \name{load_assistments_skillbuilder_2009}
 \alias{load_assistments_skillbuilder_2009}
-\title{Load and clean the ASSISTments 2009-2010 Skill Builder dataset}
+\title{Load and clean the (corrected and collapsed) ASSISTments 2009-2010 Skill Builder dataset}
 \usage{
 load_assistments_skillbuilder_2009(path)
 }
@@ -19,6 +19,6 @@ this dataset only and should not be used for other datasets.
 }
 \examples{
 \dontrun{
-df <- load_assistments_skillbuilder_2009("path/to/skill_builder_data.csv")
+df <- load_assistments_skillbuilder_2009("path/to/skill_builder_data_corrected_collapsed.csv")
 }
 }

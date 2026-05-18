@@ -1,4 +1,4 @@
-#' Load and clean the ASSISTments 2009-2010 Skill Builder dataset
+#' Load and clean the (corrected and collapsed) ASSISTments 2009-2010 Skill Builder dataset
 #'
 #' @description
 #' Loads the ASSISTments 2009-2010 Skill Builder dataset from a CSV file
@@ -13,13 +13,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' df <- load_assistments_skillbuilder_2009("path/to/skill_builder_data.csv")
+#' df <- load_assistments_skillbuilder_2009("path/to/skill_builder_data_corrected_collapsed.csv")
 #' }
 load_assistments_skillbuilder_2009 <- function(path) {
   df <- utils::read.csv(path)
 
-  # Rename first column
-  names(df)[1] <- "order_id_original"
+  # Drop row index column
+  df <- df[, names(df) != "X"]
+
+  # Rename order_id to order_id_original
+  names(df)[names(df) == "order_id"] <- "order_id_original"
 
   # Rename opportunity to order_id
   names(df)[names(df) == "opportunity"] <- "order_id"
