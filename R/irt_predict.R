@@ -28,7 +28,7 @@ append_abilities <- function(train_wide, mod){
 #' @return the fitted item parameters
 #'
 extract_item_info <- function(mod){
-  item_params <- stats::coef(mod, simplify=TRUE)
+  item_params <- mirt::coef(mod, simplify=TRUE)
   item_params <- item_params$items
   return(item_params)
 }
@@ -150,7 +150,6 @@ irt_predictions <- function(data,mod){
   irt_wide <- train_wider(irt_collapse)
   irt_wide <- append_abilities(irt_wide,mod)
   ability_lookup <- irt_wide |>
-    tibble::rownames_to_column("user_id") |>
     dplyr::select(user_id, ability)
   test_data <- test_data |>
     dplyr::left_join(ability_lookup, by = "user_id")
