@@ -13,4 +13,7 @@ BugReports: https://github.com/hhingley/educrespmod/issues
 Imports: 
     BKT,
     dplyr,
+    mirt,
+    tibble,
+    tidyr,
     utils

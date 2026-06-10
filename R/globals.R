@@ -7,5 +7,8 @@ utils::globalVariables(c(
   "correct",
   "has_variation",
   "n_resp",
-  "is_validate"
+  "is_validate",
+  "n_attempts",
+  "n_correct",
+  "score"
 ))

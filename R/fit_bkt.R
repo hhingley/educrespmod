@@ -14,6 +14,7 @@ bkt_predictions <- function(data, model) {
   train_data <- data[data$is_test == FALSE, ]
   bkt_model <- BKT::fit(model, data = train_data)
   all_preds <- BKT::predict_bkt(bkt_model, data = data)
+  names(all_preds)[names(all_preds) == "correct_predictions"] <- "predicted"
   test_preds <- all_preds[all_preds$is_test == TRUE, ]
   return(test_preds)
 }
