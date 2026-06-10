@@ -10,5 +10,11 @@ utils::globalVariables(c(
   "is_validate",
   "n_attempts",
   "n_correct",
-  "score"
+  "score",
+  "any_wrong",
+  "ability",
+  "a1",
+  "d1",
+  "d2",
+  "predicted"
 ))
