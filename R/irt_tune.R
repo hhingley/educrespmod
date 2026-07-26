@@ -78,6 +78,7 @@ loss_tune_irt <- function(validate_split,param_grid,bound = 0){
       validate_set <- validate_split |>
         dplyr::filter(is_validate == TRUE)
       ability_lookup <-tune_matrix |>
+        tibble::rownames_to_column("user_id") |>
         dplyr::select(user_id, ability)
       validate_set <- validate_set |>
         dplyr::left_join(ability_lookup, by = "user_id")

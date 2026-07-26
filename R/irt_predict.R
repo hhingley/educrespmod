@@ -158,6 +158,7 @@ irt_predictions <- function(data,mod){
   test_data <- append_repeats(test_data, train_data)
   test_data$predicted <- rep(0, nrow(test_data))
   test_data <- make_irt_predictions(test_data)
+
   return(test_data)
 }
 
