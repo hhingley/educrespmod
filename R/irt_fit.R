@@ -113,4 +113,19 @@ fit_irt_pattern <- function(data, pattern, itemtype = "gpcm"){
   return(mod)
 }
 
+#' Fits an IRT model with a specified pattern in matrix form
+#'
+#'
+#' @description Fits an IRT model using mirt package given an input matrix (in matrix form) and specified pattern
+#'
+#' @param irt_matrix A matrix output to fit IRT model to
+#' @param pattern A specified pattern for an IRT model
+#' @param itemtype The specified type of IRT model, default GPCM
+#'
+#' @return The fitted IRT model
+#'
+fit_irt_pattern_matrix <- function(irt_matrix, pattern, itemtype = "gpcm"){
+  mod <- mirt::mirt(irt_matrix,1,itemtype=itemtype,pars=pattern)
+  return(mod)
+}
 
