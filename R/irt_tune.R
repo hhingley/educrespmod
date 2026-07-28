@@ -13,6 +13,8 @@
 #' @param diff2_var hyper-parameter for the variance of the second difficulty parameter's parameter's prior
 #' @return The modified response pattern with prior distributions specified from inputted hyper-parameters
 change_pattern <- function(pattern, disc_mean,disc_var, diff1_mean,diff1_var,diff2_mean,diff2_var){
+  is_gpcm <- any(pattern$name == "d2")
+  if(is_gpcm == TRUE){
   for(i in 1:nrow(pattern)){
     if(pattern$name[i] == "a1"){
       pattern$prior.type[i] = "lnorm"
@@ -38,9 +40,33 @@ change_pattern <- function(pattern, disc_mean,disc_var, diff1_mean,diff1_var,dif
       }
     }
   }
+  }
+  else{
+    for(i in 1:nrow(pattern)){
+      print(i)
+      print(pattern$name[i])
+    if(pattern$name[i] == "a1"){
+      pattern$prior.type[i] = "lnorm"
+      pattern$prior_1[i] = disc_mean
+      pattern$prior_2[i] = disc_var
+    }
+    if(pattern$name[i] == "d1"){
+      pattern$prior.type[i] = "norm"
+      pattern$prior_1[i] = diff1_mean
+      pattern$prior_2[i] = diff1_var
+    }
+    if(pattern$est[i] == TRUE){ #change the starting value for parameters, if discrimination, start at 1, for difficulties start at 0 (after running this probably not a good idea to start at 0 for difficulties, as in reality they end at values like 3 or 6)
+        if(pattern$name[i] == "a1"){
+          pattern$value[i] = 1
+        }
+      else{
+        pattern$value[i] = 0
+        }
+    }
+    }
+  }
   return(pattern)
 }
-
 
 #' Calculate losses on the tuning grid
 #'

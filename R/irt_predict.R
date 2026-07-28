@@ -47,6 +47,7 @@ extract_item_info <- function(mod){
 #' @return the test data with appended item parameters
 #'
 append_to_test <- function(test_data,item_params){
+  if(ncol(item_params) == 7){
   test_data$a1 <- rep(NA_real_, nrow(test_data))
   test_data$ak0 <- rep(NA_real_, nrow(test_data))
   test_data$ak1 <- rep(NA_real_, nrow(test_data))
@@ -63,6 +64,25 @@ append_to_test <- function(test_data,item_params){
     test_data$d1[i] <- item_params[item,5]
     test_data$ak2[i] <- item_params[item,6]
     test_data$d2[i] <- item_params[item,7]
+  }}
+  else{
+    test_data$a1 <- rep(NA_real_, nrow(test_data))
+    test_data$ak0 <- rep(NA_real_, nrow(test_data))
+    test_data$ak1 <- rep(NA_real_, nrow(test_data))
+    test_data$d0 <- rep(NA_real_,nrow(test_data))
+    test_data$d1 <- rep(NA_real_, nrow(test_data))
+    test_data$ak2 <- rep(NA_real_, nrow(test_data))
+    test_data$d2 <- rep(NA_real_, nrow(test_data))
+    for (i in 1:nrow(test_data)){
+      item <- as.character(test_data$problem_id[i])
+      test_data$a1[i] <- item_params[item,1]
+      test_data$ak0[i] <- item_params[item,2]
+      test_data$ak1[i] <- item_params[item,3]
+      test_data$d0[i] <- item_params[item,4]
+      test_data$d1[i] <- item_params[item,5]
+      test_data$ak2[i] <- NA
+      test_data$d2[i] <- NA
+    }
   }
   return(test_data)
 }
