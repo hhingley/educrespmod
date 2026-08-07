@@ -78,23 +78,24 @@ change_pattern <- function(pattern, disc_mean,disc_var, diff1_mean,diff1_var,dif
 #' @param param_grid set of tuning parameters in grid
 #' @param bound the bound on the probabilities when using the logarithmic scoring rule
 #' default set at 0
+#' @param itemtype the type of IRT model which is fitted, default as gpcm.
 #'
 #'
 #' @return the parameter grid with the associated loss for each combination of hyper-parameters
 #' when fitted to the validation data
 #'
 #' @export
-loss_tune_irt <- function(validate_split,param_grid,bound = 0){
+loss_tune_irt <- function(validate_split,param_grid,itemtype = "gpcm",bound = 0){
   for (i in 1:nrow(param_grid)){
     tune_uncollapsed <- validate_split |>
       dplyr::filter(is_validate == FALSE)
     tune_collapsed <- collapse_train(tune_uncollapsed)
     tune_wide <- train_wider(tune_collapsed)
     tune_matrix <- train_wide_matrix(tune_wide)
-    temp_model <- suppressMessages(suppressWarnings(mirt::mirt(tune_matrix,1, itemtype = "gpcm", technical = list(NCYCLES=1))))
+    temp_model <- suppressMessages(suppressWarnings(mirt::mirt(tune_matrix,1, itemtype, technical = list(NCYCLES=1))))
     pattern <- mirt::mod2values(temp_model)
     pattern <- change_pattern(pattern, param_grid$disc_mean[i], param_grid$disc_var[i], param_grid$diff1_mean[i],param_grid$diff1_var[i],param_grid$diff2_mean[i],param_grid$diff2_var[i])
-    fitted_tune <- suppressMessages(suppressWarnings(fit_irt_pattern_matrix(tune_matrix, pattern)))
+    fitted_tune <- suppressMessages(suppressWarnings(fit_irt_pattern_matrix(tune_matrix, pattern, itemtype = itemtype)))
     if(ncol(mirt::coef(fitted_tune,simplify=TRUE)$items) < 7){
       param_grid$loss[i] <- NA
     }

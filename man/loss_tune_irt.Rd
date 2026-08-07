@@ -4,12 +4,14 @@
 \alias{loss_tune_irt}
 \title{Calculate losses on the tuning grid}
 \usage{
-loss_tune_irt(validate_split, param_grid, bound = 0)
+loss_tune_irt(validate_split, param_grid, itemtype = "gpcm", bound = 0)
 }
 \arguments{
 \item{validate_split}{the validation split of the data}
 
 \item{param_grid}{set of tuning parameters in grid}
+
+\item{itemtype}{the type of IRT model which is fitted, default as gpcm.}
 
 \item{bound}{the bound on the probabilities when using the logarithmic scoring rule
 default set at 0}
